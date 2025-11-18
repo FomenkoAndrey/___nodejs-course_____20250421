@@ -30,17 +30,3 @@ export const todos = [
     completed: false
   }
 ]
-
-export const addTodo = (todo) => {
-  todos.push(todo)
-  return todo
-}
-
-export const validateTodo = (todo) => {
-  if (!todo) return false
-  if (typeof todo.id !== 'number') return false
-  if (typeof todo.title !== 'string' || todo.title.trim() === '') return false
-  if (typeof todo.userId !== 'number') return false
-  if (typeof todo.completed !== 'boolean') return false
-  return true
-}
