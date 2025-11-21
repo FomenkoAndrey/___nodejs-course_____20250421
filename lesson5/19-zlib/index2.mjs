@@ -11,11 +11,18 @@ createServer((request, response) => {
     acceptEncoding = ''
   }
 
-  if (Array.isArray(acceptEncoding)) {
-    acceptEncoding = acceptEncoding.join(',')
-  }
+  // ! Варіант 1: Перетворюємо масив в рядок, потім перевіряємо наявність 'gzip' в рядку
+  // if (Array.isArray(acceptEncoding)) {
+  //   acceptEncoding = acceptEncoding.join(',')
+  // }
+  // if (/\bgzip\b/.test(acceptEncoding)) {
 
-  if (/\bgzip\b/.test(acceptEncoding)) {
+  // ! Варіант 2: Перевіряємо наявність 'gzip' в рядку або масиві
+  const supportsGzip = Array.isArray(acceptEncoding)
+      ? acceptEncoding.some(encoding => encoding.includes('gzip'))
+      : acceptEncoding.includes('gzip')
+
+  if (supportsGzip) {
     response.writeHead(200, { 'Content-Encoding': 'gzip' })
 
     index.pipe(createGzip()).pipe(response)

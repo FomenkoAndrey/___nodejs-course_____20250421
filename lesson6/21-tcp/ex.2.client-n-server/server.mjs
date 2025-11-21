@@ -8,7 +8,6 @@ server.on('error', (error) => {
 
 server.on('connection', (socket) => {
   console.log('New client connected!')
-
   socket.setEncoding('utf-8')
 
   socket.on('data', (msg) => {
