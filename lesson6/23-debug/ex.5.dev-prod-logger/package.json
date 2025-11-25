@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development DEBUG='server:*' node server.mjs",
-    "start:prod": "cross-env NODE_ENV=production node server.mjs"
+    "dev": "cross-env NODE_ENV=development DEBUG='server:*' node server.mjs",
+    "prod": "cross-env NODE_ENV=production node server.mjs"
   },
   "dependencies": {
     "debug": "^4.3.4",

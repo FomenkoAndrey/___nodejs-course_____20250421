@@ -3,6 +3,7 @@ import { Socket } from 'net'
 let counter = 0
 
 const client = new Socket()
+
 client.connect(3000, () => {
   console.log('Connected!')
   client.write('Hello message #1')
