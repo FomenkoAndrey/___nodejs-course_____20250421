@@ -1,15 +1,8 @@
-// console.log(process.release)
-// console.log(process.release.lts)
+const majorNodeVersion = +process.versions.node.split('.')[0]
+console.log('Major Node.js version:', majorNodeVersion)
 
-// ! 1
-// if (process.release.lts !== 'Krypton') {
-//   throw new Error('Wrong node.js version')
-// }
-//
-// console.log('Node version OK!', process.release.lts)
+if (majorNodeVersion < 20) {
+  throw new Error('Required major Node.js version is 20 or higher')
+}
 
-// ! 2
-// if (!process.release.lts) {
-//   throw new Error('Wrong node.js version')
-// }
-// console.log('Node version OK!', process.release.lts)
+console.log('Node major version OK!')

@@ -8,4 +8,4 @@ console.log('argv[3]:', process.argv[3])
 
 console.log('Continue...')
 
-// node index2.mjs dump "hello world"
+// node index2.js dump "hello world"
