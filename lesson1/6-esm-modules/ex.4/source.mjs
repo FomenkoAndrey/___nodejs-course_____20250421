@@ -1,7 +1,7 @@
-console.log('1.1 source file')
+console.log('source file')
 
 const func = function () {
-  console.log('1.2 hello from func')
+  console.log('hello from source file function')
 }
 
 func()

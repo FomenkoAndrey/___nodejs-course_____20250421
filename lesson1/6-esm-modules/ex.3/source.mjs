@@ -1,4 +1,3 @@
-// ! 1
 export const user = {
   name: 'John',
   age: 25

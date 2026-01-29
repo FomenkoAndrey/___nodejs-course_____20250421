@@ -1,6 +1,5 @@
 try {
-  require.resolve('special-module')
-  require('special-module')
+  require('new-module')
 } catch (err) {
-  console.log('Please install special-module')
+  console.log('Помилка: не вдалося завантажити папку як модуль.')
 }

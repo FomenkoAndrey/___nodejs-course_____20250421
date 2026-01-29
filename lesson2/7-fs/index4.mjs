@@ -11,3 +11,10 @@ fs.readFile('./input.txt', (err, file) => {
     })
   })
 })
+
+/*
+  ! Варіант через синхронні функції
+  const file = fs.readFileSync('./input.txt')
+  fs.writeFileSync('./output.txt', file)
+  fs.appendFileSync('./output.txt', '\nЦей рядок було додано після запису.')
+ */

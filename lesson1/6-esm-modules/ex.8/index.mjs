@@ -1,3 +1,3 @@
 import { user } from './middleware.mjs'
 
-console.log('Стало: ', user)
+console.log('Результат в index.mjs: ', user)

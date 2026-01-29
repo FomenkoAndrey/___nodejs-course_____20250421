@@ -1,1 +1,1 @@
-require('test-module')
+require('some-module')

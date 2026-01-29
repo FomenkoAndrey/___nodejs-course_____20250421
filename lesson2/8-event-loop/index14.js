@@ -1,5 +1,5 @@
-const fs = require('fs')
-const dns = require('dns')
+const fs = require('node:fs')
+const dns = require('node:dns')
 
 const time = () => `${performance.now().toFixed(2)} ms:`
 
@@ -26,16 +26,16 @@ console.log(time(), 'end')
 
 
 /*
- ! Simple Diagram
- 0 ms:    |---start---|
- 7.48 ms: |      ---end---|
- 8.27 ms: |        ---nextTick---|
- 8.37 ms: |         ---Promise---|
- 8.71 ms: |          ---Timeout1---|
- 11.1 ms: |                ---DNS: ::1---|
- 11.38 ms:|                 ---nextTick IN_DNS---|
- 11.62 ms:|                  ---Promise IN_DNS---|
- 11.92 ms:|                   ---Immediate---|
- 12.4 ms: |                      ---writeFile---|
- 24.91 ms:|                                 ---Timeout2---|
+  ! Simple Diagram
+  24.06 ms: |---start---|
+  31.61 ms: |       ---end---|
+  31.90 ms: |         ---nextTick---|
+  32.04 ms: |          ---Promise---|
+  32.24 ms: |           ---Timeout1---|
+  32.41 ms: |                ---Immediate---|
+  32.69 ms: |                 ---writeFile---|
+  34.25 ms: |                      ---DNS: ::1---|
+  34.46 ms: |                       ---nextTick IN_DNS---|
+  34.77 ms: |                        ---Promise IN_DNS---|
+  55.69 ms: |                                     ---Timeout2---|
 */

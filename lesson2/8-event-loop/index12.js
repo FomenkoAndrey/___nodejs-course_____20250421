@@ -16,9 +16,14 @@ process.nextTick(() => console.log(time(), 'nextTick'))
 
 fs.writeFile('./temp.txt', 'Hello', () => console.log(time(), 'writeFile'))
 
-// localhost -> youtube.com
+// Швидка I/O операція (зазвичай кешована)
 dns.lookup('localhost', (err, address) => {
-  console.log(time(), 'DNS:', address)
+  console.log(time(), 'DNS (localhost):', address)
+})
+
+// Реальний мережевий запит (повільніше)
+dns.lookup('youtube.com', (err, address) => {
+  console.log(time(), 'DNS (youtube.com):', address)
 })
 
 console.log(time(), 'end')

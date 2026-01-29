@@ -4,7 +4,7 @@ try {
   user.name = 'Bob'
   user.age = 25
 } catch (error) {
-  console.error(error.message)
+  console.error('! Помилка при зміні:', error.message)
 }
 
 export { user }

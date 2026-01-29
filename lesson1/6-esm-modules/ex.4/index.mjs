@@ -1,3 +1,3 @@
-import './source.mjs'
+console.log('index file')
 
-console.log('2 index file')
+import './source.mjs'

@@ -2,4 +2,4 @@ export const user = {
   name: 'John'
 }
 
-console.log('Було:', user)
+console.log('Початковий стан у source.mjs:', user)

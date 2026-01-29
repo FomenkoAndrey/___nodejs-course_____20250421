@@ -6,3 +6,5 @@
 module.exports.name = 'John'
 module.exports.age = 25
 module.exports.skills = ['html', 'css', 'js']
+
+// Для прикладу module.exports і exports можна працюють однаково
