@@ -13,8 +13,10 @@ function fib(n) {
 
 console.time('fib')
 fib(10).then((res) => console.log(res))
-fib(30).then((res) => {
+fib(20).then((res) => {
   console.log(res)
   console.timeEnd('fib')
 })
-fib(40).then((res) => console.log(res))
+// fib(40).then((res) => console.log(res))
+
+// O(2^n)

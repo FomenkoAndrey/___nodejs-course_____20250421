@@ -6,7 +6,7 @@ let memo = [0, 1]
 
 function fib(n) {
   for (let i = 2; i <= n; i++) {
-    if (!memo[i]) {
+    if (memo[i] === undefined) {
       memo[i] = memo[i - 1] + memo[i - 2]
     }
   }
@@ -23,3 +23,5 @@ console.log(fib(10000))
 console.log(fib(100000))
 console.log(fib(1000000))
 console.timeEnd('fib')
+
+// O(n)

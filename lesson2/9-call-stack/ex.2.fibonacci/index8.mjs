@@ -1,18 +1,19 @@
-setTimeout(() => console.log('Timeout', 0))
+setTimeout(() => console.log('Timeout'), 0)
 
 let memo = [0, 1]
 
 function fib(n) {
   return new Promise((resolve) => {
     function fibHelper(i) {
-      if (i <= n) {
-        if (!memo[i]) {
-          memo[i] = memo[i - 1] + memo[i - 2]
-        }
-        setImmediate(() => fibHelper(i + 1))
-      } else {
-        resolve(memo[n])
+      if (i > n) {
+        return resolve(memo[n])
       }
+
+      if (memo[i] === undefined) {
+        memo[i] = memo[i - 1] + memo[i - 2]
+      }
+
+      setImmediate(() => fibHelper(i + 1))
     }
 
     fibHelper(2)

@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "dev": "nodemon src/server.mjs"
+    "dev": "nodemon src/index.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.5.0",
+    "dotenv": "^17.2.3",
     "nodemon": "^3.1.10"
   }
 }

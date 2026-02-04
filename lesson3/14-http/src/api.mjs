@@ -1,104 +1,80 @@
 import {
-  loadFormTemplate,
-  rootHtmlTemplate,
+  rootTemplate,
   notFoundTemplate,
-  generateTodosTemplate
+  todoFormTemplate,
+  todoListTemplate,
+  todos
 } from './data.mjs'
-import { todos } from './model/todos.mjs'
-import querystring from 'node:querystring'
 
-export const generateHtml = (req, res) => {
+export const handleGetRoot = (_req, res) => {
   res.statusCode = 200
   res.setHeader('Content-Type', 'text/html')
-  res.end(rootHtmlTemplate)
+  res.end(rootTemplate())
 }
 
-export const generateText = (req, res) => {
+export const handleGetTodoForm = (_req, res) => {
+  res.statusCode = 200
+  res.setHeader('Content-Type', 'text/html')
+  res.end(todoFormTemplate())
+}
+
+export const handleGetText = (_req, res) => {
   res.statusCode = 200
   res.setHeader('Content-Type', 'text/plain')
-  res.end('Hello, this is plain text response')
+  res.end('Plain text from server')
 }
 
-let formTemplate = null
-
-export const initFormTemplate = async () => {
-  formTemplate = await loadFormTemplate()
-  return formTemplate
-}
-
-export const generateForm = async (req, res) => {
-  if (!formTemplate) {
-    formTemplate = await initFormTemplate()
-  }
-
-  if (!formTemplate) {
-    console.error('Form template could not be loaded.')
-    res.statusCode = 500
-    res.setHeader('Content-Type', 'text/plain')
-    res.end('Error loading form template')
-  } else {
-    res.statusCode = 200
-    res.setHeader('Content-Type', 'text/html')
-    res.end(formTemplate)
-  }
-}
-
-export const generateJson = (req, res) => {
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify({ message: 'Hello, this is a JSON response' }))
-}
-
-export const generateTodos = (req, res) => {
+export const handleGetJson = (_req, res) => {
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/json')
   res.end(JSON.stringify(todos))
 }
 
-export const postData = (req, res) => {
-  if (req.headers['content-type'] === 'application/x-www-form-urlencoded') {
-    let body = ''
-
-    req.on('data', (chunk) => (body += chunk.toString()))
-
-    req.on('end', () => {
-      let todo = querystring.parse(body)
-
-      todo = {
-        id: +todo.id,
-        title: todo.title,
-        userId: +todo.userId,
-        completed: todo.completed === 'on'
-      }
-
-      todos.push(todo)
-
-      res.statusCode = 201
-      res.end(generateTodosTemplate(todos))
-    })
-  } else if (req.headers['content-type'] === 'application/json') {
-    let dataJSON = ''
-    req.on('data', (chunk) => (dataJSON += chunk))
-
-    req.on('end', () => {
-      try {
-        todos.push(JSON.parse(dataJSON))
-        res.statusCode = 201
-        res.end('Data received successfully')
-      } catch (error) {
-        res.statusCode = 400
-        res.end('Invalid JSON data')
-      }
-    })
-  } else {
-    res.statusCode = 400
-    res.setHeader('Content-Type', 'text/plain')
-    res.end('Data unknown type')
-  }
+export const handleGetTodos = (_req, res) => {
+  res.statusCode = 200
+  res.setHeader('Content-Type', 'text/html')
+  res.end(todoListTemplate(todos))
 }
 
-export const generate404 = (req, res) => {
+export const handlePostTodos = (req, res) => {
+  const contentType = req.headers['content-type']
+  const isJson = contentType === 'application/json'
+  const isForm = contentType === 'application/x-www-form-urlencoded'
+
+  if (!isJson && !isForm) {
+    res.statusCode = 400
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify({ error: 'Unsupported Content-Type' }))
+    return
+  }
+
+  let body = ''
+
+  req.on('data', (chunk) => {
+    body += chunk
+  })
+
+  req.on('end', () => {
+    let data
+
+    if (isJson) {
+      data = JSON.parse(body)
+    } else if (isForm) {
+      data = Object.fromEntries(new URLSearchParams(body))
+
+      if (data.id) data.id = Number(data.id)
+      if (data.completed) data.completed = data.completed === 'true'
+    }
+
+    todos.push(data)
+    res.statusCode = 303
+    res.setHeader('Location', '/todos')
+    res.end()
+  })
+}
+
+export const handleNotFound = (_req, res) => {
   res.statusCode = 404
   res.setHeader('Content-Type', 'text/html')
-  res.end(notFoundTemplate)
+  res.end(notFoundTemplate())
 }

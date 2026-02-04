@@ -27,3 +27,5 @@ fib(70).then((res) => {
   console.log(res)
   console.timeEnd('fib')
 })
+
+// O(n)
