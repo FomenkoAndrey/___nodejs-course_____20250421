@@ -10,7 +10,7 @@ if (!fs.existsSync(sourceDir)) {
 }
 
 if (fs.existsSync(destinationDir)) {
-  fs.rmdirSync(destinationDir)
+  fs.rmdirSync(destinationDir, { recursive: true })
   console.log('Destination directory was removed')
 }
 

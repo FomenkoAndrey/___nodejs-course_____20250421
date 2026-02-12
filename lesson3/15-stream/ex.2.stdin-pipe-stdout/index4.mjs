@@ -1,4 +1,4 @@
-process.stdin.on('data', (data) => {
+heprocess.stdin.on('data', (data) => {
   // \r\n - windows, \n - unix
   if (data.toString() === 'start\r\n') {
     console.log('Let\'s go!')

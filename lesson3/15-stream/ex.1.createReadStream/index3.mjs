@@ -2,7 +2,7 @@ import http from 'http'
 import fs from 'fs'
 
 const server = http.createServer((req, res) => {
-  const filePath = './index1.html'
+  const filePath = './index.html'
 
   if (req.url === '/' && req.method === 'GET') {
     const readStream = fs.createReadStream(filePath)
