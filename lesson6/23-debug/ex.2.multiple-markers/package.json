@@ -7,7 +7,8 @@
     "start": "cross-env DEBUG='marker:*' node index.mjs",
     "start1": "cross-env DEBUG='marker:1' node index.mjs",
     "start2": "cross-env DEBUG='marker:2' node index.mjs",
-    "start12": "cross-env DEBUG='marker:1,marker:2' node index.mjs"
+    "start12": "cross-env DEBUG='marker:1,marker:2' node index.mjs",
+    "start3": "cross-env DEBUG='marker:3' node index.mjs"
   },
   "dependencies": {
     "debug": "^4.3.4"

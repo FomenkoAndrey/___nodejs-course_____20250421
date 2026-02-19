@@ -1,28 +1,14 @@
-const { getFormattedDate } = require('./index.js')
 
-test('getFormattedDate always returns the same date', () => {
-  const OriginalDate = global.Date
+const { getFormattedDate } = require('./index.js');
 
-  global.Date = class extends Date {
-    constructor() {
-      super()
-    }
+test('getFormattedDate returns correct date for fixed point in time', () => {
+  jest.useFakeTimers();
 
-    getDate() {
-      return 17
-    }
+  jest.setSystemTime(new Date('2023-12-17'));
 
-    getMonth() {
-      return 11
-    }
+  const result = getFormattedDate();
 
-    getFullYear() {
-      return 2023
-    }
-  }
+  expect(result).toBe('17-12-2023');
 
-  // Завжди повертає '17-12-2023'
-  expect(getFormattedDate()).toBe('17-12-2023')
-
-  global.Date = OriginalDate
-})
+  jest.useRealTimers();
+});

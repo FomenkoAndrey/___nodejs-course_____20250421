@@ -1,20 +1,17 @@
-const { delayedCallback } = require('./index.js')
+
+const { delayedCallback } = require('./index.js');
 
 test('delayedCallback calls the callback after a delay', () => {
-  const callback = jest.fn()
+  jest.useFakeTimers();
+  const callback = jest.fn();
 
-  jest.useFakeTimers()
+  delayedCallback(callback, 3000);
 
-  delayedCallback(callback, 3000)
+  expect(callback).not.toHaveBeenCalled();
 
-  // ! Failed
-  // delayedCallback(() => {}, 3000)
+  jest.advanceTimersByTime(3000);
 
-  expect(callback).not.toHaveBeenCalled()
+  expect(callback).toHaveBeenCalled();
 
-  jest.runAllTimers()
-
-  expect(callback).toHaveBeenCalled()
-
-  jest.useRealTimers()
-})
+  jest.useRealTimers();
+});

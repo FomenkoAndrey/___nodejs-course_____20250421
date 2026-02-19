@@ -1,8 +1,12 @@
-const fs = jest.genMockFromModule('fs')
 
-fs.promises = {
-  readFile: jest.fn().mockResolvedValue('success'),
-  access: jest.fn().mockResolvedValue(undefined)
-}
+const path = require('path');
 
-module.exports = fs
+const promises = {
+  readFile: jest.fn((filename) => Promise.resolve('success')),
+
+  access: jest.fn((filename) => Promise.resolve()),
+};
+
+module.exports = {
+  promises,
+};

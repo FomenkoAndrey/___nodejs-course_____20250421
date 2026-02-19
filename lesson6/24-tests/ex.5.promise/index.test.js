@@ -1,19 +1,22 @@
-const getData = require('./index.js')
 
-const user = { name: 'John', age: 25, sex: 'male' }
+const getData = require('./index.js');
 
-describe('Test promise function:', () => {
-  test('test async getData', async () => {
-    jest.useFakeTimers()
+const expectedUser = { name: 'John', age: 25, sex: 'male' };
 
-    const promise = getData()
+test('getData returns correct user data after delay', async () => {
+  jest.useFakeTimers();
 
-    jest.runAllTimers()
+  const promise = getData();
 
-    const data = await promise
+  jest.runAllTimers();
 
-    expect(data).toEqual(user)
+  const data = await promise;
 
-    jest.useRealTimers()
-  })
-})
+  expect(data).toEqual(expectedUser);
+
+  jest.useRealTimers();
+});
+
+test('getData resolves to correct data using .resolves matcher', async () => {
+  await expect(getData()).resolves.toEqual(expectedUser);
+});

@@ -1,14 +1,12 @@
-const getData = require('./index')
 
-jest.mock('fs')
+const getData = require('./index');
 
-const expectedValue = 'success'
+jest.mock('fs');
 
-describe('Test promise function:', () => {
-  test('test async getData', async () => {
-    // expect(await getData()).toBe(expectedValue)
-    await expect(getData()).resolves.toEqual(expectedValue)
-  })
-})
+const expectedValue = 'success';
 
-module.exports = getData
+describe('Test promise function with Mock FS:', () => {
+  test('getData returns expected value from manual mock', async () => {
+    await expect(getData()).resolves.toEqual(expectedValue);
+  });
+});

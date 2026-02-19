@@ -1,5 +1,17 @@
+
 function getType(data) {
-  return typeof data
+  return typeof data;
 }
 
-module.exports = { getType }
+function createUser(name) {
+  return {
+    id: Math.floor(Math.random() * 1000),
+    name: name,
+    createdAt: new Date(),
+  };
+}
+
+module.exports = {
+  getType,
+  createUser,
+};
