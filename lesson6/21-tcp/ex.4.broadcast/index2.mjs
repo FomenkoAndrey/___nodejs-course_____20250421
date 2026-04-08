@@ -1,4 +1,4 @@
-import { createServer } from 'net'
+import { createServer } from 'node:net'
 
 let id = 0
 let clients = []
@@ -8,6 +8,7 @@ const server = createServer()
 server.on('connection', (socket) => {
   socket.id = id++
   console.log('New client connected!')
+
   socket.setEncoding('utf-8')
 
   socket.write('Please enter your name: ')
@@ -19,15 +20,18 @@ server.on('connection', (socket) => {
       clients[socket.id] = socket
       return
     }
+
     clients.forEach((clientSocket, index) => {
       if (socket.id === index) return
-      clientSocket.write(`${socket.name} ${new Date().toLocaleTimeString()}: `)
-      clientSocket.write(msg)
+      if (clientSocket) {
+        clientSocket.write(`${socket.name} ${new Date().toLocaleTimeString()}: `)
+        clientSocket.write(msg)
+      }
     })
   })
 
   socket.on('end', () => {
-    clients = clients.filter((clientSocket, index) => index !== socket.id)
+    delete clients[socket.id]
     console.log('Client is disconnected!')
   })
 })

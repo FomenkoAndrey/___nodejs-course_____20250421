@@ -7,7 +7,7 @@
     "start": "cross-env DEBUG='server:*' node server.mjs",
     "start:data": "cross-env DEBUG='server:data' node server.mjs",
     "start:connect": "cross-env DEBUG='server:connection:connect' node server.mjs",
-    "start:connection": "cross-env DEBUG='server:connection:connect,server:connection:disconnect' node server.mjs"
+    "start:connection": "cross-env DEBUG='server:connection:connect,server:co ' node server.mjs"
   },
   "dependencies": {
     "debug": "^4.3.4"
